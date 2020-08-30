@@ -7,8 +7,11 @@ public class EmpWage
 		int empHrs;
 		int workingDays=20;
 		int totalSalary=0;
-
-		for(int i=0; i<=workingDays; i++){
+		int maxHrsInMonth=100;
+		int totalHours=0;
+		int totalWorkingDays=0;
+	while (totalHours<maxHrsInMonth && totalWorkingDays < workingDays ){
+		totalWorkingDays++;
 		int randomValue=(int)Math.floor(Math.random()*10)%3;
 		switch(randomValue)
 		{
@@ -22,8 +25,8 @@ public class EmpWage
                 default :
 			empHrs=0;
            	}
-		salary=empRatePerHr*empHrs;
-		totalSalary=totalSalary+salary;
+		totalHours=totalHours+empHrs;
+		totalSalary=empRatePerHr*totalHours;
 	}
 		System.out.println("Total Salary="+totalSalary);
         }
