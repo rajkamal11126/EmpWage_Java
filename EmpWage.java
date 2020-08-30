@@ -4,7 +4,7 @@ public class EmpWage {
         private int empRate;
         private int numOfWorkingDays;
         private int maxHrsInMonth;
-
+	private int totalEmpWage;
 
         public EmpWage(final String companyName, final int empRate, final int numOfWorkingDays, final int maxHrsInMonth)
         {
@@ -16,22 +16,21 @@ public class EmpWage {
 
         public static void main(String[] args) {
         final EmpWage ewSamsung = new EmpWage("Samsung", 20, 20, 100);
-        final int totalSamEmpWages = ewSamsung.computeEmpWage();
+        ewSamsung.computeEmpWage();
         final EmpWage ewWipro = new EmpWage("Wipro", 25, 15, 100);
-        final int totalWiproEmpWages = ewWipro.computeEmpWage();
+        ewWipro.computeEmpWage();
 	final EmpWage ewAmazon = new EmpWage("Amazon", 25, 10, 200);
-        final int totalAmazonEmpWages = ewAmazon.computeEmpWage();
+        ewAmazon.computeEmpWage();
 
-        System.out.println("Total Emp Wage of Samsung: "+totalSamEmpWages);
-        System.out.println("Total Emp Wage of Wipro: "+totalWiproEmpWages);
-	System.out.println("Total Emp Wage of Amazon: "+totalAmazonEmpWages);
-
+	System.out.println(ewSamsung);
+	System.out.println(ewWipro);
+	System.out.println(ewAmazon);
         }
 
         /*
          calculate employee daily wages based on type of employee
          */
-        public int computeEmpWage() {
+        public void computeEmpWage() {
                 int totalWage = 0;
                 int totalEmpHrs = 0;
                 int totalWorkingDays = 0;
@@ -44,8 +43,12 @@ public class EmpWage {
                         totalWage+=empWage;
                         //System.out.println("Emp DAY : "+totalWorkingDays+" wages : "+empWage);
                 }
-                return totalWage;
+                 totalEmpWage=totalWage*empRate;
                 //System.out.println("Total emp wage : "+ totalWage);
+	}
+	
+	public String toString(){
+		return "Total emp wage for company: "+companyName+" is "+ totalEmpWage;
 	}
  	public int getEmpHrs() {
 
