@@ -1,34 +1,54 @@
-public class EmpWage
-{
-        public static void main(String args[])
-        {
-		int empRatePerHr=20;
-		int salary;
-		int empHrs;
-		int workingDays=20;
-		int totalSalary=0;
-		int maxHrsInMonth=100;
-		int totalHours=0;
-		int totalWorkingDays=0;
-	while (totalHours<maxHrsInMonth && totalWorkingDays < workingDays ){
-		totalWorkingDays++;
-		int randomValue=(int)Math.floor(Math.random()*10)%3;
-		switch(randomValue)
-		{
-                case 1:
-			empHrs=8;
-			break;
+public class EmpWage {
+	
+	private static final int EMP_RATE_PER_HRS = 20;
+	private static final int NUM_OF_WORKING_DAYS = 20;
+	private static final int MAX_HRS_IN_MONTH = 100;
 
-		case 2:
-                        empHrs=4;
-			break;
-                default :
-			empHrs=0;
-           	}
-		totalHours=totalHours+empHrs;
-		totalSalary=empRatePerHr*totalHours;
+	public static void main(String[] args) {
+		calDailyEmpWage();
 	}
-		System.out.println("Total Salary="+totalSalary);
-        }
+
+	/**
+	 * calculate employee daily wages based on type of employee 
+	 */
+	public static void calDailyEmpWage() {
+		int totalWage = 0;
+		int totalEmpHrs = 0;
+		int totalWorkingDays = 0;
+		while(totalEmpHrs < MAX_HRS_IN_MONTH && totalWorkingDays<NUM_OF_WORKING_DAYS){
+			totalWorkingDays++;
+
+			final int empHrs = getEmpHrs();
+			final int empWage = empHrs*EMP_RATE_PER_HRS;
+			totalEmpHrs+=empHrs;
+			totalWage+=empWage;
+			System.out.println("Emp DAY : "+totalWorkingDays+" wages : "+empWage);
+		}
+		System.out.println("Total emp wage : "+ totalWage);
+}
+	public static int getEmpHrs() {
+
+		final int isFullTime = 1;
+		final int isPartTime = 2;
+		int empHrs = 0;
+
+		final double randomValue = Math.floor(Math.random()*10)%3;
+
+		switch((int)randomValue) {
+
+			case isFullTime:
+				empHrs = 8;
+				System.out.println("Emp is present for full time.");
+				break;
+			case isPartTime:
+				empHrs = 4;
+				System.out.println("Emp is present for part time.");
+				break;
+			default:
+				System.out.println("Emp is absent");
+				break;
+		}
+		return empHrs;
+	}
 }
 
