@@ -1,5 +1,12 @@
-public class EmpWage {
-	
+
+
+interface EmpWageBuilder {
+	void addCompany(final String name, final int empRate, final int numOfWorkingDays, final int maxHrsInMonth);
+}
+
+
+public class EmpWage implements EmpWageBuilder{
+
 	private int noOfCompany = 0;
 	private Company [] companies;
 
@@ -10,8 +17,9 @@ public class EmpWage {
 	public static void main(String[] args) {
 
 		final EmpWage ew = new EmpWage();
-		ew.addCompany("Wipro", 20, 20, 100);
-		ew.addCompany("TCS", 20, 18, 110);
+		ew.addCompany("Samsung", 20, 20, 100);
+		ew.addCompany("Wipro", 20, 18, 110);
+		ew.addCompany("Amazon", 20, 25, 130);
 
 		ew.computeEmpWage();
 	}
@@ -23,6 +31,7 @@ public class EmpWage {
 
 
 	private void computeEmpWage(){
+
 		for(int i = 0; i< noOfCompany; i++){
 			final int totalWage = computeEmpWage(companies[i]);
 			companies[i].setTotalEmpWage(totalWage);
