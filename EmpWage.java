@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 interface EmpWageBuilder {
 	void addCompany(final String name, final int empRate, final int numOfWorkingDays, final int maxHrsInMonth);
+	void computeEmpWage();
+	int getTotalWageByCompanyName(final String name);
 }
 
 public class EmpWage implements EmpWageBuilder{
@@ -25,6 +27,13 @@ public class EmpWage implements EmpWageBuilder{
 		ew.addCompany("Amazon", 20, 25, 130);
 
 		ew.computeEmpWage();
+		final int totalWage = ew.getTotalWageByCompanyName("Wipro");
+		System.out.println("Total emp wage for Wipro : "+totalWage);
+	}
+
+	public int getTotalWageByCompanyName(final String name) {
+		final int totalWage = companyWages.get(name);
+		return totalWage;
 	}
 	@Override
 	public void addCompany(final String name, final int empRate, final int numOfWorkingDays, final int maxHrsInMonth){
