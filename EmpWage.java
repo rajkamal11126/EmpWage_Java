@@ -1,17 +1,16 @@
-
+import java.util.List;
+import java.util.ArrayList;
 
 interface EmpWageBuilder {
 	void addCompany(final String name, final int empRate, final int numOfWorkingDays, final int maxHrsInMonth);
 }
 
-
 public class EmpWage implements EmpWageBuilder{
 
-	private int noOfCompany = 0;
-	private Company [] companies;
+	private List<Company> companies;
 
 	public EmpWage() {
-		companies = new Company[5];
+		companies = new ArrayList<Company>();
 	}
 
 	public static void main(String[] args) {
@@ -23,19 +22,19 @@ public class EmpWage implements EmpWageBuilder{
 
 		ew.computeEmpWage();
 	}
-
+	@Override
 	public void addCompany(final String name, final int empRate, final int numOfWorkingDays, final int maxHrsInMonth){
-		companies[noOfCompany] = new Company(name, empRate, numOfWorkingDays, maxHrsInMonth);
-		noOfCompany++;
+		companies.add(new Company(name, empRate, numOfWorkingDays, maxHrsInMonth));
 	}
 
 
 	private void computeEmpWage(){
 
-		for(int i = 0; i< noOfCompany; i++){
-			final int totalWage = computeEmpWage(companies[i]);
-			companies[i].setTotalEmpWage(totalWage);
-			System.out.println(companies[i]);
+		for(int i = 0; i< companies.size(); i++){
+			final Company company = companies.get(i);
+			final int totalWage = computeEmpWage(company);
+			company.setTotalEmpWage(totalWage);
+			System.out.println(company);
 		}
 
 	}
