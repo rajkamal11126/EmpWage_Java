@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 interface EmpWageBuilder {
 	void addCompany(final String name, final int empRate, final int numOfWorkingDays, final int maxHrsInMonth);
@@ -8,9 +10,11 @@ interface EmpWageBuilder {
 public class EmpWage implements EmpWageBuilder{
 
 	private List<Company> companies;
+	private Map<String, Integer> companyWages;
 
 	public EmpWage() {
 		companies = new ArrayList<Company>();
+		companyWages = new HashMap<String, Integer>();
 	}
 
 	public static void main(String[] args) {
@@ -28,14 +32,16 @@ public class EmpWage implements EmpWageBuilder{
 	}
 
 
-	private void computeEmpWage(){
+	public void computeEmpWage(){
 
 		for(int i = 0; i< companies.size(); i++){
 			final Company company = companies.get(i);
 			final int totalWage = computeEmpWage(company);
 			company.setTotalEmpWage(totalWage);
-			System.out.println(company);
+			companyWages.put(company.getName(),totalWage);
+			//System.out.println(company);
 		}
+		System.out.println("Stored value in Map =====> "+companyWages.toString());
 
 	}
 	/**
@@ -44,6 +50,7 @@ public class EmpWage implements EmpWageBuilder{
 	 * @return total employee wages.
 	 */
 	private int computeEmpWage(final Company company) {
+		System.out.println("Calculate the wages for company : "+company.getName());
 		int totalWage = 0;
 		int totalEmpHrs = 0;
 		int totalWorkingDays = 0;
@@ -89,7 +96,7 @@ public class EmpWage implements EmpWageBuilder{
 		return empHrs;
 	}
 
-	
+
 }
 
 /**
